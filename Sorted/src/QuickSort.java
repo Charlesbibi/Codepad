@@ -3,7 +3,11 @@ import java.util.Arrays;
 
 public class QuickSort {
 
-    // 快速排序
+    /**
+     * 快速排序  -  以右端点为基准，比右端点小的往左边移动，而比右端点打的往右边移动，这样在循环结束后的位置就是基准的位置，采用递归解决更小规模的问题
+     *
+     *      时间复杂度 O(n*logn)  当逆序的时候最坏O(n*n)
+     */
     private static void qSort(int[] arr, int left, int right) {
         if (left >= right) {
             return;
