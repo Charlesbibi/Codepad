@@ -40,15 +40,24 @@ public class LowerHP {
     private static int reverse_dp_find_lower_hp(int n, int m, int[][] rooms) {
         int[][] dp = new int[n][m];
 
-        // 从右下角开始
+        // 从右下角开始, 每一个房间最低hp就是1了，从末尾开始临界值就是1
         dp[n-1][m-1] = Math.max(1, 1-rooms[n-1][m-1]);
 
+        // 处理行和列的边界， 如果说上一个房间的血量小于这个房间的加血量，则进入这个房间的最小HP就是1
         for(int i = n-2;i>=0;i--){
             dp[i][m-1] = Math.max(1, dp[i+1][m-1] - rooms[i][m-1]);
         }
 
         for(int i = m-2;i>=0;i--){
-            dp[m-1][i] = Math.max(1, dp[i+1][m-1] - rooms[i][m-1]);
+            dp[n-1][i] = Math.max(1, dp[n-1][i+1] - rooms[n-1][i]);
+        }
+
+        for(int i = n-2;i>=0;i--){
+            for(int j = n-2;j>=0;j--){
+                // 对于中间的房间，需要判断右边或者下面走哪一个代价更小
+                int need = Math.min(dp[i+1][j], dp[i][j+1]);
+                dp[i][j] = Math.max(1, need - rooms[i][j]);
+            }
         }
 
         return dp[0][0];
