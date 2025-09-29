@@ -43,6 +43,7 @@ public class DfsSearch{
      * dfs深度优先遍历图
      * @param graph 图
      * @param start 当前访问的节点
+     * @param isVisit 记录是否遍历过
      */
     private static void dfs(List<Integer>[] graph, int start, boolean[] isVisit){
         // 非合法
